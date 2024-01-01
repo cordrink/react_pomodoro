@@ -1,0 +1,15 @@
+.timmers-table {
+    margin-top: 3rem;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.timmers-table th,
+.timmers-table td{
+    padding: .5rem;
+    text-align: left;
+}
+
+.timmers-table th {
+    border-bottom: 1px solid black;
+}
