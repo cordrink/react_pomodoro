@@ -1,65 +1,51 @@
-import {Component} from "react";
+import { useState} from "react";
 import s from './Timer.module.css';
+import ClockDisplay from "./ClockDisplay";
+let timerId;
 
-function secondsToHms(timeInSeconds) {
-    timeInSeconds = Number(timeInSeconds);
-    const h = Math.floor(timeInSeconds / 3600);
-    const m = Math.floor(timeInSeconds % 3600 / 60);
-    const s = Math.floor(timeInSeconds % 3600 % 60);
+function Timer(props) {
 
-    const hdisplay = h < 10 ? `0${h}` : h;
-    const mdisplay = m < 10 ? `0${m}` : m;
-    const sdisplay = s < 10 ? `0${s}` : h;
+    const [isTimerStarted, setIsTimerStarted] = useState(false);
+    const [time, setTime] = useState(0);
 
-    return `${hdisplay}:${mdisplay}:${sdisplay}`;
-}
 
-class Timer extends Component{
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isTimerStarted: false,
-            time: 0,
-        }
-    }
+    const handleStartTimer = () => {
 
-    handleStartTimer = () => {
-        if (this.state.isTimerStarted) {
+        if (isTimerStarted) {
 
-            clearInterval(this.timerId);
+            clearInterval(timerId);
 
-            this.props.saveTime(this.state.time);
+            props.saveTime(time);
 
-            this.setState({
-                isTimerStarted: false,
-                time: 0
-            })
+            setIsTimerStarted(false);
+            setTime(0)
 
         }else {
-            this.setState({
-                isTimerStarted: true
-            })
 
-            this.timerId = setInterval(() => {
-                this.setState(({time}) => {
-                    return {
-                        time: time + 1
-                    }
-                })
-            }, 1000)
+            setIsTimerStarted(true);
+
+            timerId = setInterval(() => {
+                setTime((prevTime) => {
+                    return prevTime + 1;
+                });
+            }, 1000);
         }
     }
 
-    render() {
-        return (
-            <>
-                <p className={s.clockTimer}>{secondsToHms(this.state.time)}</p>
-                <button className={`${s.clockBtn} ${s[`clockBtn${this.state.isTimerStarted ? 'Stop' : 'Start'}`]}`} onClick={this.handleStartTimer}>{this.state.isTimerStarted ? 'Stop' : 'Start'}</button>
-            </>
+    return (
+        <>
+            {/*<p className={s.clockTimer}>{secondsToHms(this.state.time)}</p>*/}
+            <ClockDisplay classname={s.clockTimer} time={time} />
 
-        );
-    }
+            <button
+                className={`${s.clockBtn} ${s[`clockBtn${isTimerStarted ? 'Stop' : 'Start'}`]}`}
+                onClick={ handleStartTimer}
+            >
+                {isTimerStarted ? 'Stop' : 'Start'}
+            </button>
+        </>
+    )
 }
 
 export default Timer;
