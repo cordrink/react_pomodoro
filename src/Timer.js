@@ -1,6 +1,7 @@
-import { useState} from "react";
+import {useMemo, useState} from "react";
 import s from './Timer.module.css';
 import ClockDisplay from "./ClockDisplay";
+import Button from "./Button";
 let timerId;
 
 function Timer(props) {
@@ -32,18 +33,25 @@ function Timer(props) {
             }, 1000);
         }
     }
+    
+    /*const displayParagraph = useMemo(() => {
+        return (
+            <p>{isTimerStarted ? 'Le timer est demarré' : 'Le timer est arreté'}</p>
+        )
+    }, [isTimerStarted]);*/
+
+    const handleClick = () => {
+        alert('Hello Word');
+    };
 
     return (
         <>
             {/*<p className={s.clockTimer}>{secondsToHms(this.state.time)}</p>*/}
             <ClockDisplay classname={s.clockTimer} time={time} />
 
-            <button
-                className={`${s.clockBtn} ${s[`clockBtn${isTimerStarted ? 'Stop' : 'Start'}`]}`}
-                onClick={ handleStartTimer}
-            >
-                {isTimerStarted ? 'Stop' : 'Start'}
-            </button>
+            <Button isTimerStarted={isTimerStarted} handleStartTimer={handleStartTimer} />
+            <Button isTimerStarted={isTimerStarted} handleStartTimer={handleClick} />
+
         </>
     )
 }

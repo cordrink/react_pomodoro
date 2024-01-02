@@ -2,22 +2,13 @@ import Timer from "./Timer";
 import TimersTable from "./TimersTable";
 import s from './App.module.css'
 import {useState} from "react";
+import useTimeParser from "./hooks/useTimeParser";
 
-function secondsToHms(timeInSeconds) {
-    timeInSeconds = Number(timeInSeconds);
-    const h = Math.floor(timeInSeconds / 3600);
-    const m = Math.floor(timeInSeconds % 3600 / 60);
-    const s = Math.floor(timeInSeconds % 3600 % 60);
-
-    const hdisplay = h < 10 ? `0${h}` : h;
-    const mdisplay = m < 10 ? `0${m}` : m;
-    const sdisplay = s < 10 ? `0${s}` : h;
-
-    return `${hdisplay}:${mdisplay}:${sdisplay}`;
-}
 
 function App() {
     const [timers, setTimers] = useState([]);
+
+    const { parseSecondsToHms } = useTimeParser();
 
     const saveTime = (time) => {
         const date = new Date();
@@ -28,7 +19,7 @@ function App() {
     const displayTimerDetails = timer => {
         const date = new Date();
 
-        alert(`${timer.date.toLocaleDateString()} at ${timer.date.toLocaleTimeString()} \n${secondsToHms(timer.time)}`);
+        alert(`${timer.date.toLocaleDateString()} at ${timer.date.toLocaleTimeString()} \n${parseSecondsToHms(timer.time)}`);
 
     }
 

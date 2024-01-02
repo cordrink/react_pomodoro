@@ -4,22 +4,3 @@
     color: tomato;
 }
 
-.clockBtn {
-    padding: .6rem 1.8rem;
-    font-size: 1.8rem;
-    border-radius: 20px;
-    color: beige;
-    border: none;
-}
-
-.clockBtnStart {
-    background-color: tomato;
-}
-
-.clockBtnStop {
-    background-color: sandybrown;
-}
-
-.clockBtn:hover {
-    cursor: pointer;
-}

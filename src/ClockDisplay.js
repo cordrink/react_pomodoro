@@ -1,24 +1,14 @@
 import React from 'react';
+import useTimeParser from "./hooks/useTimeParser";
 
 function ClockDisplay({time, classname}) {
 
-    const secondsToHms = (timeInSeconds) => {
-        timeInSeconds = Number(timeInSeconds);
-        const h = Math.floor(timeInSeconds / 3600);
-        const m = Math.floor(timeInSeconds % 3600 / 60);
-        const s = Math.floor(timeInSeconds % 3600 % 60);
-
-        const hdisplay = h < 10 ? `0${h}` : h;
-        const mdisplay = m < 10 ? `0${m}` : m;
-        const sdisplay = s < 10 ? `0${s}` : h;
-
-        return `${hdisplay}:${mdisplay}:${sdisplay}`;
-    }
+    const { parseSecondsToHms } = useTimeParser();
 
     return (
         <span className={classname}>
             {
-                secondsToHms(time)
+                parseSecondsToHms(time)
             }
         </span>
     );
