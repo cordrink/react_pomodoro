@@ -1,7 +1,8 @@
-import {useMemo, useState} from "react";
+import { useState} from "react";
 import s from './Timer.module.css';
 import ClockDisplay from "./ClockDisplay";
 import Button from "./Button";
+import TaskForm from "./TaskForm";
 let timerId;
 
 function Timer(props) {
@@ -40,9 +41,6 @@ function Timer(props) {
         )
     }, [isTimerStarted]);*/
 
-    const handleClick = () => {
-        alert('Hello Word');
-    };
 
     return (
         <>
@@ -50,7 +48,7 @@ function Timer(props) {
             <ClockDisplay classname={s.clockTimer} time={time} />
 
             <Button isTimerStarted={isTimerStarted} handleStartTimer={handleStartTimer} />
-            <Button isTimerStarted={isTimerStarted} handleStartTimer={handleClick} />
+            <TaskForm isTimerStarted={isTimerStarted} onSubmit={handleStartTimer} />
 
         </>
     )

@@ -1,4 +1,5 @@
 function UseTimeParser(props) {
+
     const parseSecondsToHms = (timeInSeconds) => {
         timeInSeconds = Number(timeInSeconds);
         const h = Math.floor(timeInSeconds / 3600);
@@ -10,11 +11,11 @@ function UseTimeParser(props) {
         const sdisplay = s < 10 ? `0${s}` : h;
 
         return `${hdisplay}:${mdisplay}:${sdisplay}`;
-    }
+    };
 
-    return (
-        parseSecondsToHms
-    );
+    return {
+        parseSecondsToHms,
+    };
 }
 
 export default UseTimeParser;

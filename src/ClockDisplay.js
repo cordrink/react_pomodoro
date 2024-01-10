@@ -3,7 +3,8 @@ import useTimeParser from "./hooks/useTimeParser";
 
 function ClockDisplay({time, classname}) {
 
-    const { parseSecondsToHms } = useTimeParser();
+    let { parseSecondsToHms } = useTimeParser();
+
 
     return (
         <span className={classname}>
